@@ -1,5 +1,6 @@
 #' @include utilities.R utilities_label.R
 NULL
+#'Changed correlation label to lower case "R" (i.e. r) 
 #'Add Correlation Coefficients with P-values to a Scatter Plot
 #'@description Add correlation coefficients with p-values to a scatter plot. Can
 #'  be also used to add `R2`.
@@ -124,7 +125,7 @@ StatCor<- ggproto("StatCor", Stat,
   if(output.type == "expression"){
 
     z <- z %>% dplyr::mutate(
-      r.label = paste("italic(R)", r, sep = "~`=`~"),
+      r.label = paste("italic(r)", r, sep = "~`=`~"),
       rr.label = paste("italic(R)^2", rr, sep = "~`=`~"),
       p.label = paste("italic(p)", p, sep = "~`=`~")
     )
@@ -150,7 +151,7 @@ StatCor<- ggproto("StatCor", Stat,
   else if (output.type %in% c("latex", "tex", "text")){
 
     z <- z %>% dplyr::mutate(
-      r.label = paste("R", r, sep = " = "),
+      r.label = paste("r", r, sep = " = "),
       rr.label = paste("R2", rr, sep = " = "),
       p.label = paste("p", p, sep = "=")
     )
@@ -158,7 +159,7 @@ StatCor<- ggproto("StatCor", Stat,
     # Default label
     pvaltxt <- ifelse(pval < 2.2e-16, "p < 2.2e-16",
                       paste("p =", signif(pval, 2)))
-    cortxt <- paste0("R = ", signif(.cor$estimate, 2),
+    cortxt <- paste0("r = ", signif(.cor$estimate, 2),
                      label.sep,  pvaltxt)
     z$label <- cortxt
   }
